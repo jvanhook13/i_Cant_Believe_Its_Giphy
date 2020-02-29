@@ -1,14 +1,20 @@
 var topics = ["memes" , "subarus" , "bunnies" , "crackheads" , "narwhals" , "jif"]
 
  function displayGifs() {
-    var apiURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "s&api_key=dc6zaTOxFJmzC&limit=10";
+    
+    // this in this line is the button that was clicked which grabs the data-name which is the same as button text
+    //sets it gif then plugs it into the apiURL
     var gif = $(this).attr("data-name")
-
+    var apiURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=Txl5zxTtp7uNcJisLz536WRVX8Op4ZX7&limit=10";
+        console.log(this)
+        console.log(gif)
      $.ajax({
          url: apiURL ,
          method: "GET"
-
+        
     }).then(function(response) {
+        console.log(apiURL)
+        
         console.log(response , "response")
         //new div to hold gifs and ratings
         var newDiv = $("#<div>")
@@ -25,6 +31,8 @@ var topics = ["memes" , "subarus" , "bunnies" , "crackheads" , "narwhals" , "jif
         newDiv.append(newP)
         //appends newDiv onto the gifs-view div
         newDiv.appendTo("#gifs-view")
+        
+        
         // creates a new img tag for the gif url
         var newGif = $("<img>")
         // puts the img source as the gif url 
