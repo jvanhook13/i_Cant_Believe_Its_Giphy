@@ -5,7 +5,7 @@ var topics = ["memes" , "subarus" , "bunnies" , "crackheads" , "narwhals" , "jif
     // this in this line is the button that was clicked which grabs the data-name which is the same as button text
     //sets it gif then plugs it into the apiURL
     var gif = $(this).attr("data-name")
-    var apiURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=Txl5zxTtp7uNcJisLz536WRVX8Op4ZX7&limit=10";
+    var apiURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=Txl5zxTtp7uNcJisLz536WRVX8Op4ZX7&limit=10";
         console.log(this)
         console.log(gif)
      $.ajax({
@@ -16,13 +16,21 @@ var topics = ["memes" , "subarus" , "bunnies" , "crackheads" , "narwhals" , "jif
         console.log(apiURL)
         
         console.log(response , "response")
-        //new div to hold gifs and ratings
-        var newDiv = $("#<div>")
+        console.log(response.data.length , "length")
         // grab rating from ajax request
-        var gifRating = response.rating
-        console.log(response.rating)
+        $("#gifs-view").empty()
+
+        for (var i = 0; i < response.data.length ; i++) {
+            
+        var gifRating = response.data[i].rating
+        console.log(response.data[i].rating , "rating")
+        
         // grab gif url from ajax request
-        var newGifs = response.url
+        var newGifs = response.data[i].images.original.url
+        var newRatings = response.data[i].rating
+        console.log(response.data[i].images.original.url , "url") 
+        //new div to hold gifs and ratings
+        var newDiv = $("<div>")
         // creates new paragraph tag for ratings
         var newP = $("<p>")
         // puts gif rating in new p
@@ -37,12 +45,17 @@ var topics = ["memes" , "subarus" , "bunnies" , "crackheads" , "narwhals" , "jif
         var newGif = $("<img>")
         // puts the img source as the gif url 
         newGif.attr("src" , newGifs)
+        console.log(newGifs)
         //appends newGif to newDiv
         newDiv.append(newGif)
         // appends newDiv onto gifs-view
         newDiv.appendTo("#gifs-view")
         
         console.log(newGifs)
+
+        
+        
+        }
 
 
  })
