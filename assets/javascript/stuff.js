@@ -44,7 +44,11 @@ var topics = ["memes" , "subarus" , "bunnies" , "crackheads" , "narwhals" , "jif
         // creates a new img tag for the gif url
         var newGif = $("<img>")
         // puts the img source as the gif url 
-        newGif.attr("src" , newGifs)
+        newGif.attr("src" , response.data[i].images.fixed_height_small_still.url)
+        newGif.attr("data-still" , response.data[i].images.fixed_height_small_still.url)
+        newGif.attr("data-animate" , newGifs)
+        newGif.attr("data-state" , "still")
+        newGif.addClass("gifs")
         console.log(newGifs)
         //appends newGif to newDiv
         newDiv.append(newGif)
@@ -91,10 +95,26 @@ $("#add-gif").on("click", function(event) {
 
     //runs make buttons on click
     makeButtons(); 
+    $("#gif-input").text(" ")
 
 });
 
 // event handler for clicks on buttons with class gif?
 $(document).on("click" , ".gif" , displayGifs)
+//animates gifs when clicked and pauses when clicked again
+$(document).on("click", ".gifs", function(){
+    var state = $(this).attr('data-state');
+    if ( state == 'still'){
+        $(this).attr('src', $(this).data('animate'));
+        $(this).attr('data-state', 'animate');
+    }else{
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-state', 'still');
+    }
+
+})
 // runs make buttons
 makeButtons() ;
+
+
+
