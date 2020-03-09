@@ -1,4 +1,4 @@
-var topics = ["memes" , "subarus" , "bunnies" , "crackheads" , "narwhals" , "jif"]
+var topics = ["memes" , "subarus" , "bunnies" , "node.js" , "narwhals" , "jif"]
 
  function displayGifs() {
     
